@@ -42,24 +42,26 @@ public class Wallet {
     public HashMap<Integer, Integer> getCoins() {
         return coins;
     }
-
-    public void addCoin(Integer coin) {
-        boolean isValid = false;
-        for (int coinType : coinTypes) {
-            if (coin == coinType) {
-                isValid = true;
-                break;
+    private boolean isValidType(int coinOrMoney, int[] types) {
+        for (int coinOrMoneyType : types) {
+            if (coinOrMoney == coinOrMoneyType) {
+                return true;
             }
         }
-        if (isValid) {
+        return false;
+    }
+    public void addCoin(Integer coin) {
+        if (isValidType(coin, coinTypes)) {
             int currentValue = this.coins.get(coin);
             this.coins.put(coin, currentValue+1);
         }
     }
     public void takeCoin(Integer coin) {
-        int currentValue = this.coins.get(coin);
-        if (currentValue > 0) {
-            this.coins.put(coin, currentValue-1);
+        if (isValidType(coin, coinTypes)) {
+            int currentValue = this.coins.get(coin);
+            if (currentValue > 0) {
+                this.coins.put(coin, currentValue-1);
+            }
         }
     }
     public HashMap<Integer, Integer> getMoneys() {
@@ -67,22 +69,17 @@ public class Wallet {
     }
 
     public void addMoney(Integer money) {
-        boolean isValid = false;
-        for (int moneyType : moneyTypes) {
-            if (money == moneyType) {
-                isValid = true;
-                break;
-            }
-        }
-        if (isValid) {
+        if (isValidType(money, moneyTypes)) {
             int currentValue = this.moneys.get(money);
             this.moneys.put(money, currentValue+1);
         }
     }
     public void takeMoney(Integer money) {
-        int currentValue = this.moneys.get(money);
-        if (currentValue > 0) {
-            this.moneys.put(money, currentValue-1);
+        if (isValidType(money, moneyTypes)) {
+            int currentValue = this.moneys.get(money);
+            if (currentValue > 0) {
+                this.moneys.put(money, currentValue-1);
+            }
         }
     }
     public int getMoneyAvailable() {

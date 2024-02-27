@@ -1,24 +1,18 @@
 import org.example.Wallet;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class WalletTest {
-    private  Wallet wallet;
-
-    @BeforeEach
-    public void setUp() {
-        wallet = new Wallet("Siapa Aku");
-    }
-
     @Test
     public void testGetOwner() {
+        Wallet wallet = new Wallet("Siapa Aku");
         Assertions.assertEquals("Siapa Aku", wallet.getOwner());
         wallet.setOwner("Bambang");
         Assertions.assertEquals("Bambang", wallet.getOwner());
     }
     @Test
     public void testAddCard() {
+        Wallet wallet = new Wallet("Siapa Aku");
         wallet.addCard("KTM");
         Assertions.assertTrue(wallet.getCards().contains("KTM"));
         wallet.addCard("KTP");
@@ -27,6 +21,7 @@ public class WalletTest {
     }
     @Test
     public void testAddCoin() {
+        Wallet wallet = new Wallet("Siapa Aku");
         wallet.addCoin(500);
         wallet.addCoin(100);
         wallet.addCoin(1000);
@@ -39,6 +34,7 @@ public class WalletTest {
     }
     @Test
     public void testTakeCoin() {
+        Wallet wallet = new Wallet("Siapa Aku");
         wallet.addCoin(500);
         wallet.addCoin(100);
         wallet.addCoin(1000);
@@ -55,17 +51,20 @@ public class WalletTest {
     }
     @Test
     public void testAddMoney() {
+        Wallet wallet = new Wallet("Siapa Aku");
         wallet.addMoney(2000);
         wallet.addMoney(2000);
         Assertions.assertEquals(2, wallet.getMoneys().get(2000));
     }
     @Test
     public void testAddMoneyInvalid() {
+        Wallet wallet = new Wallet("Siapa Aku");
         wallet.addMoney(4000);
         Assertions.assertNull(wallet.getMoneys().get(4000));
     }
     @Test
     public void testTakeMoney() {
+        Wallet wallet = new Wallet("Siapa Aku");
         wallet.addMoney(5000);
         wallet.addMoney(100000);
         wallet.addMoney(20000);
@@ -75,12 +74,14 @@ public class WalletTest {
     }
     @Test
     public void testTakeMoneyInvalid() {
+        Wallet wallet = new Wallet("Siapa Aku");
         wallet.addMoney(10000);
-        wallet.takeMoney(5000);
+        wallet.takeMoney(50700);
         Assertions.assertEquals(0, wallet.getMoneys().get(5000));
     }
     @Test
     public void testCalculateCoins() {
+        Wallet wallet = new Wallet("Siapa Aku");
         wallet.addCoin(500);
         wallet.addCoin(100);
         wallet.addCoin(1000);
@@ -93,6 +94,7 @@ public class WalletTest {
     }
     @Test
     public void testCalculateMoneys() {
+        Wallet wallet = new Wallet("Siapa Aku");
         wallet.addMoney(5000);
         wallet.addMoney(100000);
         wallet.addMoney(20000);
@@ -107,6 +109,7 @@ public class WalletTest {
     }
     @Test
     public void testGetMoneyAvailable() {
+        Wallet wallet = new Wallet("Siapa Aku");
         wallet.addMoney(5000);
         wallet.addMoney(100000);
         wallet.addMoney(20000);
