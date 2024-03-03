@@ -27,21 +27,27 @@ public class Wallet {
     public String getOwner() {
         return this.owner;
     }
+
     public void setOwner(String owner) {
         this.owner = owner;
     }
+
     public ArrayList<String> getCards() {
         return this.cards;
     }
+
     public void addCard(String card) {
         this.cards.add(card);
     }
+
     public void removeCard(String card) {
         this.cards.remove(card);
     }
+
     public HashMap<Integer, Integer> getCoins() {
         return coins;
     }
+
     private boolean isValidType(int coinOrMoney, int[] types) {
         for (int coinOrMoneyType : types) {
             if (coinOrMoney == coinOrMoneyType) {
@@ -50,20 +56,23 @@ public class Wallet {
         }
         return false;
     }
+
     public void addCoin(Integer coin) {
         if (isValidType(coin, coinTypes)) {
             int currentValue = this.coins.get(coin);
-            this.coins.put(coin, currentValue+1);
+            this.coins.put(coin, currentValue + 1);
         }
     }
+
     public void takeCoin(Integer coin) {
         if (isValidType(coin, coinTypes)) {
             int currentValue = this.coins.get(coin);
             if (currentValue > 0) {
-                this.coins.put(coin, currentValue-1);
+                this.coins.put(coin, currentValue - 1);
             }
         }
     }
+
     public HashMap<Integer, Integer> getMoneys() {
         return moneys;
     }
@@ -71,31 +80,35 @@ public class Wallet {
     public void addMoney(Integer money) {
         if (isValidType(money, moneyTypes)) {
             int currentValue = this.moneys.get(money);
-            this.moneys.put(money, currentValue+1);
+            this.moneys.put(money, currentValue + 1);
         }
     }
+
     public void takeMoney(Integer money) {
         if (isValidType(money, moneyTypes)) {
             int currentValue = this.moneys.get(money);
             if (currentValue > 0) {
-                this.moneys.put(money, currentValue-1);
+                this.moneys.put(money, currentValue - 1);
             }
         }
     }
+
     public int getMoneyAvailable() {
         return this.calculateCoins() + this.calculateMoneys();
     }
+
     public int calculateCoins() {
         int total = 0;
         for (int key : coins.keySet()) {
-            total += key*this.coins.get(key);
+            total += key * this.coins.get(key);
         }
         return total;
     }
+
     public int calculateMoneys() {
         int total = 0;
         for (int key : moneys.keySet()) {
-            total += key*this.moneys.get(key);
+            total += key * this.moneys.get(key);
         }
         return total;
     }
